@@ -70,3 +70,5 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+*.md
+Inquisitor/Library/PackageCache/com.unity.toolchain.win-x86_64-linux-x86_64@2.0.6/data~/payload.tar.7z

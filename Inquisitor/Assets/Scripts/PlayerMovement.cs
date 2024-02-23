@@ -12,14 +12,13 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Movimiento horizontal y vertical
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        float moveForward = Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3(0.0f, 0.0f, moveForward);
         transform.Translate(movement * speed * Time.deltaTime);
 
         // Rotación
-        float rotationInput = Input.GetAxis("HorizontalRotation"); // Capturar la entrada de rotación lateral
-        transform.Rotate(Vector3.up * rotationInput * rotationSpeed * Time.deltaTime);
+        float rotationInput = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime; // Capturar la entrada de rotación lateral
+        transform.Rotate(Vector3.up * rotationInput);
 
         // Salto
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
