@@ -72,3 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 *.md
 Inquisitor/Library/PackageCache/com.unity.toolchain.win-x86_64-linux-x86_64@2.0.6/data~/payload.tar.7z
+Inquisitor/Temp/UnityLockfile
+Inquisitor/Temp/FSTimeGet-149fd89c9d95f1f44ab0f4d69c3f75d0
