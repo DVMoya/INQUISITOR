@@ -10,11 +10,14 @@ public class PlayerMovement : MonoBehaviour
     public GameObject damageBox;
 
     public Rigidbody m_Rigidbody;
-    private bool isGrounded; // Variable para controlar si el jugador está en el suelo
+    public Animator m_Animator;
+    private bool isGrounded = false; // Variable para controlar si el jugador está en el suelo
+    private bool isRunning  = false; //Comprueba cuando está corriendo el jugador (controla las animaciones)
 
     void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        m_Animator = GetComponentInChildren<Animator>();
         damageBox.SetActive(false);
     }
 
@@ -38,9 +41,16 @@ public class PlayerMovement : MonoBehaviour
             // Desactivar el GameObject de daño
             damageBox.SetActive(false);
         }
+
+        // Control de la animación
+        //Prota corriendo
+        isRunning = Input.GetKey(KeyCode.W) ||
+                    Input.GetKey(KeyCode.A) ||
+                    Input.GetKey(KeyCode.S) ||
+                    Input.GetKey(KeyCode.D);
+        m_Animator.SetBool("isRunning", isRunning);
     }
 
-    
     void FixedUpdate()
     {
         /*
@@ -48,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
             Salto y Ataque siguen en update para responder lo más rápido posible a los inputs
         */
 
-        // Movimiento horizontal y vertical
+        // Movimiento horizontal
         float moveForward = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(0.0f, 0.0f, moveForward);
         transform.Translate(movement * speed * Time.deltaTime);
