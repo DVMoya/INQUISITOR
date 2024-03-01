@@ -11,8 +11,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody m_Rigidbody;
     public Animator m_Animator;
-    private bool isGrounded = false; // Variable para controlar si el jugador está en el suelo
-    private bool isRunning  = false; //Comprueba cuando está corriendo el jugador (controla las animaciones)
+    private bool isGrounded     = false; // Variable para controlar si el jugador está en el suelo
+    private bool isRunning      = false; // Comprueba cuando está corriendo el jugador (controla las animaciones)
+    private bool isAttacking    = false; // Comprueba cuando está atacando. sirve para controlar la animación. y quiza en un futuro más
 
     void Awake()
     {
@@ -33,11 +34,17 @@ public class PlayerMovement : MonoBehaviour
         // Ataque
         if (Input.GetKeyDown(KeyCode.K))
         {
+            isAttacking = true;
+            m_Animator.SetBool("isAttacking", isAttacking);
+
             // Activar el GameObject de daño
             damageBox.SetActive(true);
         }
         else if (Input.GetKeyUp(KeyCode.K))
         {
+            isAttacking = false;
+            m_Animator.SetBool("isAttacking", isAttacking);
+
             // Desactivar el GameObject de daño
             damageBox.SetActive(false);
         }
@@ -48,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
                     Input.GetKey(KeyCode.A) ||
                     Input.GetKey(KeyCode.S) ||
                     Input.GetKey(KeyCode.D);
+
         m_Animator.SetBool("isRunning", isRunning);
     }
 

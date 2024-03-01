@@ -216,6 +216,7 @@ MonoBehaviour:
   jumpForce: 6.5
   damageBox: {fileID: 305964162898899784}
   m_Rigidbody: {fileID: 0}
+  m_Animator: {fileID: 0}
 --- !u!1001 &6245151431305221785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -271,7 +272,7 @@ PrefabInstance:
     - target: {fileID: 9500000, guid: 50f131f0037f8044eb2b929731ec0a32, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 0d2a25dfb60c5e4479a2490b7db6aba4, type: 2}
+      objectReference: {fileID: 9100000, guid: 31153f386549468429052a4f8d7a4f6c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
