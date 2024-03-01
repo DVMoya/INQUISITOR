@@ -74,23 +74,9 @@ public class PlayerMovement : MonoBehaviour
         // Rotación
         float rotationInput = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime; // Capturar la entrada de rotación lateral
         transform.Rotate(Vector3.up * rotationInput);
-    }
 
-    // Verificar si el jugador está en el suelo
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    // Verificar si el jugador deja de tocar el suelo
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
+        // compruebo si está en el aire por si puede dar otro salto
+        Vector3 dwn = transform.TransformDirection(Vector3.down);
+        isGrounded = Physics.Raycast(transform.position, dwn, (float)1.5); // El entero representa la distancia al suelo desde la cual puede saltar
     }
 }
