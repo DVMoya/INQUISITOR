@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f; // Velocidad de movimiento del jugador
+    /*
+        STATS
+    */
+    public float speed  = 5f;   // Velocidad de movimiento del jugador
+    public float damage = 5f;   // Daño por segundo
+    public float life   = 10f;  // Vida máxima/actual
+
     public float rotationSpeed = 100f; // Velocidad de rotación del jugador
     public float jumpForce = 10f; // Fuerza del salto
-    public GameObject damageBox;
 
+    public GameObject damageBox;
     public Rigidbody m_Rigidbody;
+
+    /*
+        ANIMATOR CONTROLLER
+    */
     public Animator m_Animator;
     private bool isGrounded     = false; // Variable para controlar si el jugador está en el suelo
     private bool isRunning      = false; // Comprueba cuando está corriendo el jugador (controla las animaciones)
