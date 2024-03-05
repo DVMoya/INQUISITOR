@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviour, IDamageable<float>
 {
-    [HideInInspector] CharacterController m_Controller;
-    [HideInInspector] Animator m_Animator;
+    private CharacterController m_Controller;
+    private Animator m_Animator;
+    public GameObject m_Player;
+    public GameObject dust;
     public GameObject damageBox;
 
+    public float maxHealth = 10f;
+    public float currentHealth;
+    public float damage = 1f;
     public float moveSpeed;
     [SerializeField, Range(0f, 200f)] float rotaSpeed;
     public float jumpForce;
@@ -23,7 +28,10 @@ public class NewBehaviourScript : MonoBehaviour
     {
         m_Controller = GetComponent<CharacterController>();
         m_Animator   = GetComponentInChildren<Animator>();
+
         damageBox.SetActive(false);
+
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -85,5 +93,48 @@ public class NewBehaviourScript : MonoBehaviour
                     Input.GetKey(KeyCode.D);
 
         m_Animator.SetBool("isRunning", isRunning);
+
+        if(isRunning && m_Controller.isGrounded) dust.SetActive(true);
+        else dust.SetActive(false);
+
+
+
+
+
+        /*
+            TESTING SCIPTS
+        */
+        if(Input.GetKeyDown(KeyCode.Alpha1)) TakeDamage(2f);
+        if(Input.GetKeyDown(KeyCode.Alpha2)) Heal(2f);
+        if(Input.GetKeyDown(KeyCode.Alpha3)) FullHeal();
+
+    }
+
+
+    /*
+        IDamageable INTERFACE
+
+        Controls all objects that can be dealt damage
+    */
+
+    public void Heal(float healStrength){
+        currentHealth += healStrength;
+        if(currentHealth > maxHealth) currentHealth = maxHealth;
+    }
+
+    public void FullHeal(){
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(float damageTaken){
+        currentHealth -= damageTaken;
+        if(currentHealth <= 0f){
+            currentHealth = 0f;
+            Kill();
+        }
+    }
+
+    public void Kill(){
+        Destroy(m_Player);
     }
 }
