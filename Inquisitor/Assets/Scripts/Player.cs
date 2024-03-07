@@ -7,14 +7,15 @@ public class NewBehaviourScript : MonoBehaviour, IDamageable<float>
     private CharacterController m_Controller;
     private Animator m_Animator;
     public GameObject m_Player;
-    public GameObject dust;
+    //public GameObject dust;
     public GameObject damageBox;
 
     public float maxHealth = 10f;
     public float currentHealth;
     public float damage = 1f;
+    public float damageTick = 0.5f;
     public float moveSpeed;
-    [SerializeField, Range(0f, 200f)] float rotaSpeed;
+    public float rotaSpeed;
     public float jumpForce;
     public float gravityScale;
 
@@ -94,8 +95,8 @@ public class NewBehaviourScript : MonoBehaviour, IDamageable<float>
 
         m_Animator.SetBool("isRunning", isRunning);
 
-        if(isRunning && m_Controller.isGrounded) dust.SetActive(true);
-        else dust.SetActive(false);
+        //if(isRunning && m_Controller.isGrounded) dust.SetActive(true);
+        //else dust.SetActive(false);
 
 
 
@@ -132,6 +133,11 @@ public class NewBehaviourScript : MonoBehaviour, IDamageable<float>
             currentHealth = 0f;
             Kill();
         }
+    }
+
+    public void DealDamage(Collider col)
+    {
+        col.SendMessage("TakeDamage", damage * damageTick * Time.deltaTime);
     }
 
     public void Kill(){
