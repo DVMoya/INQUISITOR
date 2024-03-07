@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DamageTrigger : MonoBehaviour
@@ -7,8 +8,25 @@ public class DamageTrigger : MonoBehaviour
     public GameObject m_DamageDealer;
     public string _tag;
 
-    private void OnTriggerStay(Collider other)
+    private float _tick;
+
+    public void SetTick(float tick) {  _tick = tick; }
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == _tag) m_DamageDealer.SendMessage("DealDamage", other);
+        StartCoroutine(WaitForTick(other));
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        StopCoroutine(WaitForTick(other));   
+    }
+
+    IEnumerator WaitForTick(Collider other)
+    {
+        if (other.CompareTag(_tag)) m_DamageDealer.SendMessage("DealDamage", other);
+        yield return new WaitForSeconds(_tick);
+
+        StartCoroutine(WaitForTick(other));
     }
 }

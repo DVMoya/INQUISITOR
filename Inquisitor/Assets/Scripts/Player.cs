@@ -21,6 +21,7 @@ public class NewBehaviourScript : Character
         m_Controller = GetComponent<CharacterController>();
         m_Animator   = GetComponentInChildren<Animator>();
 
+        damageBox.GetComponent<DamageTrigger>().SetTick(_damageTick); // Tells the damage trigger the damage tick rate (this was the simplest way I could think of)
         damageBox.SetActive(false);
 
         FullHeal();
@@ -104,10 +105,10 @@ public class NewBehaviourScript : Character
 
     public override void DealDamage(Collider col)
     {
-        col.SendMessage("TakeDamage", _damage * _damageTick * Time.deltaTime);
+        col.SendMessage("TakeDamage", _damage);
     }
 
     public override void Kill(){
         Destroy(m_Player);
-    }
+    } 
 }

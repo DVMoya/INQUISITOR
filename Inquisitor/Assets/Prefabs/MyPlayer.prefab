@@ -197,7 +197,7 @@ MonoBehaviour:
   _healthM: 20
   _healthC: 0
   _damage: 10
-  _damageTick: 1
+  _damageTick: 1.5
   _speedM: 5
   _speedR: 120
   _jumpF: 0

@@ -39,7 +39,7 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
         _healthC = _healthM;
     }
 
-    public void TakeDamage(float damageTaken)
+    public virtual void TakeDamage(float damageTaken)
     {
         _healthC -= damageTaken;
         if (_healthC <= 0f)
