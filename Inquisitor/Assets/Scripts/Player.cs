@@ -2,22 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour, IDamageable<float>
+public class NewBehaviourScript : Character
 {
     private CharacterController m_Controller;
     private Animator m_Animator;
     public GameObject m_Player;
     //public GameObject dust;
     public GameObject damageBox;
-
-    public float maxHealth = 10f;
-    public float currentHealth;
-    public float damage = 1f;
-    public float damageTick = 0.5f;
-    public float moveSpeed;
-    public float rotaSpeed;
-    public float jumpForce;
-    public float gravityScale;
 
     private Vector3 moveDirection;
     private Vector3 rotation;
@@ -32,7 +23,7 @@ public class NewBehaviourScript : MonoBehaviour, IDamageable<float>
 
         damageBox.SetActive(false);
 
-        currentHealth = maxHealth;
+        FullHeal();
     }
 
     // Update is called once per frame
@@ -44,25 +35,25 @@ public class NewBehaviourScript : MonoBehaviour, IDamageable<float>
         moveDirection = new Vector3(0f, moveDirection.y, 0f);
 
         if(m_Controller.isGrounded){
-            moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * moveSpeed;
+            moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM;
 
             if (Input.GetButtonDown("Jump")){
-                moveDirection.y = jumpForce;
+                moveDirection.y = _jumpF;
             } else {
                 moveDirection.y = 0;    // For a smoother fall from the cliff
             }
         } else {
-            moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * moveSpeed * 0.75f; //Reduced movement while airborne
+            moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM * 0.75f; //Reduced movement while airborne
         }
 
-        moveDirection.y = moveDirection.y + Physics.gravity.y * gravityScale * Time.deltaTime;
+        moveDirection.y = moveDirection.y + Physics.gravity.y * _gravity * Time.deltaTime;
 
         m_Controller.Move(moveDirection * Time.deltaTime);
 
         /*
             ROTATIONS
         */
-        float rotationInput = Input.GetAxis("Horizontal") * rotaSpeed * Time.deltaTime; // Capturar la entrada de rotación lateral
+        float rotationInput = Input.GetAxis("Horizontal") * _speedR * Time.deltaTime; // Capturar la entrada de rotación lateral
         transform.Rotate(Vector3.up * rotationInput);
 
         /*
@@ -111,36 +102,12 @@ public class NewBehaviourScript : MonoBehaviour, IDamageable<float>
 
     }
 
-
-    /*
-        IDamageable INTERFACE
-
-        Controls all objects that can be dealt damage
-    */
-
-    public void Heal(float healStrength){
-        currentHealth += healStrength;
-        if(currentHealth > maxHealth) currentHealth = maxHealth;
-    }
-
-    public void FullHeal(){
-        currentHealth = maxHealth;
-    }
-
-    public void TakeDamage(float damageTaken){
-        currentHealth -= damageTaken;
-        if(currentHealth <= 0f){
-            currentHealth = 0f;
-            Kill();
-        }
-    }
-
-    public void DealDamage(Collider col)
+    public override void DealDamage(Collider col)
     {
-        col.SendMessage("TakeDamage", damage * damageTick * Time.deltaTime);
+        col.SendMessage("TakeDamage", _damage * _damageTick * Time.deltaTime);
     }
 
-    public void Kill(){
+    public override void Kill(){
         Destroy(m_Player);
     }
 }
