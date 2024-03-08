@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class NewBehaviourScript : Character
     {
         m_Controller = GetComponent<CharacterController>();
         m_Animator   = GetComponentInChildren<Animator>();
+        m_Animator.SetFloat("atSpeed", _damageTick * 1.5f); // 1.5f --> base duration of the animation
+        // ^ makes the attack animation play at the same rate as the player deals damage
+        // (I have to update this whenever the player upgrades its damage tick rate)
 
         damageBox.GetComponent<DamageTrigger>().SetTick(_damageTick); // Tells the damage trigger the damage tick rate (this was the simplest way I could think of)
         damageBox.SetActive(false);
@@ -39,6 +43,7 @@ public class NewBehaviourScript : Character
             moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM;
 
             if (Input.GetButtonDown("Jump")){
+                Console.WriteLine("jump");
                 moveDirection.y = _jumpF;
             } else {
                 moveDirection.y = 0;    // For a smoother fall from the cliff
@@ -60,7 +65,7 @@ public class NewBehaviourScript : Character
         /*
             ANIMATOR CONTROLLER
         */
-
+        
         // ATTACK
         if (Input.GetKeyDown(KeyCode.K))
         {

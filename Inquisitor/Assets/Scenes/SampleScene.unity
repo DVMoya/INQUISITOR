@@ -1599,6 +1599,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4365683071842403710, guid: 57063d924f1605a418ba2bdeddc36f00, type: 3}
+      propertyPath: _damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365683071842403710, guid: 57063d924f1605a418ba2bdeddc36f00, type: 3}
+      propertyPath: _damageTick
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

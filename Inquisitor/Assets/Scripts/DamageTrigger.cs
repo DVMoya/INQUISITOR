@@ -25,7 +25,7 @@ public class DamageTrigger : MonoBehaviour
     IEnumerator WaitForTick(Collider other)
     {
         if (other.CompareTag(_tag)) m_DamageDealer.SendMessage("DealDamage", other);
-        yield return new WaitForSeconds(_tick);
+        yield return new WaitForSeconds(1/_tick); //I want to deal damage _tick times per second
 
         StartCoroutine(WaitForTick(other));
     }

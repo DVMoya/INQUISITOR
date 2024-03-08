@@ -26,6 +26,7 @@ public class Dummy : Character
 
     IEnumerator WaitForAnimation(float wait)
     {
+        //It doesn't matter that the pushed animation plays at a different rate than it receives damage
         yield return new WaitForSeconds(wait);
         m_Animator.SetBool("isHit", false);
     }
