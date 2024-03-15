@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305964162898899784}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -196,11 +196,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthM: 20
   _healthC: 0
-  _damage: 10
-  _damageTick: 1.5
+  _damage: 1
+  _damageTick: 1
   _speedM: 5
   _speedR: 120
-  _jumpF: 0
+  _jumpF: 7
   _gravity: 1.25
   m_Player: {fileID: 3080673267356394836}
   damageBox: {fileID: 305964162898899784}
