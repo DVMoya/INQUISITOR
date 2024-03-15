@@ -13,8 +13,9 @@ public class NewBehaviourScript : Character
 
     private Vector3 moveDirection;
     private Vector3 rotation;
-    private bool isAttacking = false;
-    private bool isRunning = false;
+    private bool isAttacking    = false;
+    private bool isRunning      = false;
+    private bool isAirborne     = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,17 +39,23 @@ public class NewBehaviourScript : Character
             MOVEMENT
         */
         moveDirection = new Vector3(0f, moveDirection.y, 0f);
+        isAirborne = !m_Controller.isGrounded;
+        
 
-        if(m_Controller.isGrounded){
+        if (!isAirborne){
             moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM;
 
             if (Input.GetButtonDown("Jump")){
                 Console.WriteLine("jump");
                 moveDirection.y = _jumpF;
+
+                m_Animator.SetBool("isAirborne", true);
             } else {
+                
                 moveDirection.y = 0;    // For a smoother fall from the cliff
             }
         } else {
+            m_Animator.SetBool("isAirborne", false);
             moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM * 0.75f; //Reduced movement while airborne
         }
 
