@@ -40,7 +40,6 @@ public class NewBehaviourScript : Character
         */
         moveDirection = new Vector3(0f, moveDirection.y, 0f);
         isAirborne = !m_Controller.isGrounded;
-        
 
         if (!isAirborne){
             moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM;
@@ -51,11 +50,10 @@ public class NewBehaviourScript : Character
 
                 m_Animator.SetBool("isAirborne", true);
             } else {
-                
+                m_Animator.SetBool("isAirborne", false);
                 moveDirection.y = 0;    // For a smoother fall from the cliff
             }
         } else {
-            m_Animator.SetBool("isAirborne", false);
             moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM * 0.75f; //Reduced movement while airborne
         }
 
