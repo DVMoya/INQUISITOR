@@ -10,6 +10,7 @@ public class NewBehaviourScript : Character
     public GameObject m_Player;
     //public GameObject dust;
     public GameObject damageBox;
+    public GameObject groundBox;
 
     private Vector3 moveDirection;
     private Vector3 rotation;
@@ -45,7 +46,7 @@ public class NewBehaviourScript : Character
             moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM;
 
             if (Input.GetButtonDown("Jump")){
-                Console.WriteLine("jump");
+                Debug.Log("jump");
                 moveDirection.y = _jumpF;
 
                 m_Animator.SetBool("isAirborne", true);
