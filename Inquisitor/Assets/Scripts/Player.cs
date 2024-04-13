@@ -45,7 +45,7 @@ public class NewBehaviourScript : Character
         if (!isAirborne){
             moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM;
 
-            if (Input.GetButtonDown("Jump")){
+            if (Input.GetKey(KeyCode.Space)){
                 Debug.Log("jump");
                 moveDirection.y = _jumpF;
 
