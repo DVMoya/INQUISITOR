@@ -367,6 +367,7 @@
 "Assets/Scripts/DamageTrigger.cs"
 "Assets/Scripts/Dummy.cs"
 "Assets/Scripts/IDamageable.cs"
+"Assets/Scripts/LevelController.cs"
 "Assets/Scripts/Player.cs"
 -langversion:9.0
 
