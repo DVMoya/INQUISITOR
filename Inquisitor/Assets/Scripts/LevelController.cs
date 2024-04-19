@@ -34,7 +34,8 @@ public class LevelController : MonoBehaviour
         // GeneratedCodeAttribute random level
         Vector3 position = Vector3.zero;
         position.x = xPosMod;
-        Instantiate(posibleLevels[index], position, posibleLevels[index].transform.rotation);
+        GameObject currentLevel = Instantiate(posibleLevels[index], position, posibleLevels[index].transform.rotation);
+        currentLevel.SetActive(true);
 
         // Get rid of generated level in array, to avoid generating the same level repeatedly
         posibleLevels = posibleLevels.Where((e, i) => i != index).ToArray();
