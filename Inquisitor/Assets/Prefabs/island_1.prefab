@@ -354,13 +354,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1054987007453334482}
+  - component: {fileID: 8006210613569983033}
   m_Layer: 0
   m_Name: island_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1054987007453334482
 Transform:
   m_ObjectHideFlags: 0
@@ -371,7 +372,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -40, y: -5, z: -42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5847160900576160214}
@@ -381,6 +382,20 @@ Transform:
   - {fileID: 8071053731560600296}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8006210613569983033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560507520328861126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e477dbdc6d43e9e44a3e387a276262b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1
+  duration: 0.5
 --- !u!1 &7913090967272753271
 GameObject:
   m_ObjectHideFlags: 0

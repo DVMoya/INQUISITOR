@@ -107,9 +107,9 @@ public class NewBehaviourScript : Character
         /*
             TESTING SCIPTS
         */
-        if(Input.GetKeyDown(KeyCode.Alpha1)) TakeDamage(2f);
-        if(Input.GetKeyDown(KeyCode.Alpha2)) Heal(2f);
-        if(Input.GetKeyDown(KeyCode.Alpha3)) FullHeal();
+        //if(Input.GetKeyDown(KeyCode.Alpha1)) TakeDamage(2f);
+        //if(Input.GetKeyDown(KeyCode.Alpha2)) Heal(2f);
+        //if(Input.GetKeyDown(KeyCode.Alpha3)) FullHeal();
 
     }
 

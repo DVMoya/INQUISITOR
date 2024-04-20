@@ -7,26 +7,26 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    const int levelSize = -20;
+    public static LevelController instance;
 
     public GameObject[] levels;
 
     private System.Random random = new System.Random();
-    private int xPosMod = 0;
+    
     [HideInInspector] public GameObject[] posibleLevels;
+    [SerializeField] private int xPosMod    = 0;
+    [SerializeField] private int levelSize  = -20;
+    [SerializeField] private int delay      = 10;
     private int index;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        CreateLevel(); // Create the first island
-
-        for (int i = 0; i < 7; i++) { CreateLevel(); }
-    }
+    private GameObject previouslyGenerated;
+    private GameObject currentLevel;
 
     public void CreateLevel()
     {
-        if(posibleLevels.Length == 0) { posibleLevels = levels; }
+        previouslyGenerated = currentLevel;
+
+        if (posibleLevels.Length == 0) { posibleLevels = levels; }
 
         // Select a random level
         index = random.Next(posibleLevels.Length);
@@ -34,7 +34,7 @@ public class LevelController : MonoBehaviour
         // GeneratedCodeAttribute random level
         Vector3 position = Vector3.zero;
         position.x = xPosMod;
-        GameObject currentLevel = Instantiate(posibleLevels[index], position, posibleLevels[index].transform.rotation);
+        currentLevel = Instantiate(posibleLevels[index], position, posibleLevels[index].transform.rotation);
         currentLevel.SetActive(true);
 
         // Get rid of generated level in array, to avoid generating the same level repeatedly
@@ -43,5 +43,17 @@ public class LevelController : MonoBehaviour
 
         //increase positon displacement for the next level generated
         xPosMod += levelSize;
+
+        // Get rid of the previous instance generated after a delay
+        StartCoroutine(DestroyPreviousLevel(previouslyGenerated));
+    }
+
+    IEnumerator DestroyPreviousLevel(GameObject destroyMe)
+    {
+        if (destroyMe != null) {
+            yield return new WaitForSeconds(delay); // give the player some time to get out of danger
+            destroyMe.SendMessage("Disappear");     // disappear animation
+            Destroy(destroyMe, delay);              // destroy object in 4 seconds
+        }
     }
 }
