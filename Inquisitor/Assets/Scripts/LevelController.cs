@@ -53,7 +53,9 @@ public class LevelController : MonoBehaviour
         if (destroyMe != null) {
             yield return new WaitForSeconds(delay); // give the player some time to get out of danger
             destroyMe.SendMessage("Disappear");     // disappear animation
-            Destroy(destroyMe, delay);              // destroy object in 4 seconds
+
+            yield return new WaitForSeconds(destroyMe.GetComponent<Level>().Duration);  // wait for the disapearing animation to finish
+            Destroy(destroyMe);                                                         // destroy object in 4 seconds
         }
     }
 }

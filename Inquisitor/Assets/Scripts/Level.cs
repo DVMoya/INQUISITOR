@@ -9,6 +9,8 @@ public class Level : MonoBehaviour
     [SerializeField] private float scale;
     [SerializeField] private float duration;    // in seconds
 
+    public float Duration { get { return duration; } }
+
     private void Awake()
     {
         transform.DOScale(scale, duration);
