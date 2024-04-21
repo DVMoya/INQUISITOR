@@ -9,9 +9,20 @@ public class WaterMeshGenerator : MonoBehaviour
 
     Vector3[] vertices;
     int[] triangles;
+    Color[] colors;
 
-    public int xSize = 20;
-    public int zSize = 20;
+    public int xSize = 200;
+    public int zSize = 200;
+    public float frameRate = .1f;
+    public float scale = 20f;
+    public float xOffset = 0;
+    public float zOffset = 0;
+    public Vector2 flow = new Vector2(.05f, .05f);
+
+    public Gradient gradient;
+
+    private float maxTerrainHeight;
+    private float minTerrainHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +30,17 @@ public class WaterMeshGenerator : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
+        StartCoroutine(UpdateWater(frameRate));
+    }
+
+    IEnumerator UpdateWater(float fps)
+    {
         CreateShape();
         UpdateMesh();
+
+        yield return new WaitForSeconds(fps);
+
+        StartCoroutine(UpdateWater(fps));
     }
 
     void CreateShape()
@@ -32,8 +52,13 @@ public class WaterMeshGenerator : MonoBehaviour
         {
             for (int x = 0; x <= xSize; x++)
             {
-                float y = Mathf.PerlinNoise(x * .3f, z * .3f) * 2f;
+                //float y = Mathf.PerlinNoise(x * .3f, z * .3f) * 2f;
+                float y = CalculateVertexHeight(x, z);
                 vertices[i] = new Vector3(x, y, z);
+
+                if (y > maxTerrainHeight) maxTerrainHeight = y;
+                if (y < minTerrainHeight) minTerrainHeight = y;
+
                 i++;
             }
         }
@@ -59,6 +84,21 @@ public class WaterMeshGenerator : MonoBehaviour
             }
             vert++; // get rid of the aberrant triangle formed when jumping to the next line
         }
+
+        colors = new Color[vertices.Length];
+
+        for (int i = 0, z = 0; z <= zSize; z++)
+        {
+            for (int x = 0; x <= xSize; x++)
+            {
+                float heigth = Mathf.InverseLerp(minTerrainHeight, maxTerrainHeight, vertices[i].y);
+                colors[i] = gradient.Evaluate(heigth);
+                i++;
+            }
+        }
+
+        xOffset += flow.x;
+        zOffset += flow.y;
     }
 
     void UpdateMesh()
@@ -67,18 +107,16 @@ public class WaterMeshGenerator : MonoBehaviour
 
         mesh.vertices   = vertices;
         mesh.triangles  = triangles;
+        mesh.colors = colors;
 
         mesh.RecalculateNormals();
     }
 
-    private void OnDrawGizmos()
+    float CalculateVertexHeight(int x, int z)
     {
-        if (vertices == null)
-            return;
+        float xCoord = (float)x / xSize * scale + xOffset;
+        float zCoord = (float)z / zSize * scale + zOffset;
 
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            Gizmos.DrawSphere(vertices[i], .1f);
-        }
+        return Mathf.PerlinNoise(xCoord, zCoord);
     }
 }
