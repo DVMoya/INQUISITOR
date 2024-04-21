@@ -11,6 +11,8 @@ public class WaterMeshGenerator : MonoBehaviour
     int[] triangles;
     Color[] colors;
 
+    public GameObject target;
+    public float planeHeight = 0;
     public int xSize = 200;
     public int zSize = 200;
     public float frameRate = .1f;
@@ -30,7 +32,13 @@ public class WaterMeshGenerator : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
+        
         StartCoroutine(UpdateWater(frameRate));
+    }
+
+    private void Update()
+    {
+        Follow();
     }
 
     IEnumerator UpdateWater(float fps)
@@ -40,7 +48,8 @@ public class WaterMeshGenerator : MonoBehaviour
 
         yield return new WaitForSeconds(fps);
 
-        StartCoroutine(UpdateWater(fps));
+        if (flow != Vector2.zero)               // if there's no flow there is no need to recalculate the vertices
+            StartCoroutine(UpdateWater(fps));
     }
 
     void CreateShape()
@@ -52,7 +61,6 @@ public class WaterMeshGenerator : MonoBehaviour
         {
             for (int x = 0; x <= xSize; x++)
             {
-                //float y = Mathf.PerlinNoise(x * .3f, z * .3f) * 2f;
                 float y = CalculateVertexHeight(x, z);
                 vertices[i] = new Vector3(x, y, z);
 
@@ -118,5 +126,16 @@ public class WaterMeshGenerator : MonoBehaviour
         float zCoord = (float)z / zSize * scale + zOffset;
 
         return Mathf.PerlinNoise(xCoord, zCoord);
+    }
+
+    void Follow()
+    {
+        Vector3 targetPos = new Vector3(target.transform.position.x,
+                                        0,
+                                        target.transform.position.z);
+        Vector3 offsetPos = new Vector3(-(xSize / 2) * (transform.localScale.x),
+                                        planeHeight,
+                                        -(zSize / 2) * (transform.localScale.x));
+        transform.position = targetPos + offsetPos;
     }
 }
