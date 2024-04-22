@@ -387,6 +387,7 @@
 "Assets/Scripts/Character.cs"
 "Assets/Scripts/DamageTrigger.cs"
 "Assets/Scripts/Dummy.cs"
+"Assets/Scripts/FPScounter.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/IDamageable.cs"
 "Assets/Scripts/Level.cs"

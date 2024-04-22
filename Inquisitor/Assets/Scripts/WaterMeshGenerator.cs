@@ -32,7 +32,7 @@ public class WaterMeshGenerator : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
-        
+
         StartCoroutine(UpdateWater(frameRate));
     }
 
@@ -43,13 +43,13 @@ public class WaterMeshGenerator : MonoBehaviour
 
     IEnumerator UpdateWater(float fps)
     {
-        CreateShape();
-        UpdateMesh();
+        do
+        {
+            CreateShape();
+            UpdateMesh();
 
-        yield return new WaitForSeconds(fps);
-
-        if (flow != Vector2.zero)               // if there's no flow there is no need to recalculate the vertices
-            StartCoroutine(UpdateWater(fps));
+            yield return new WaitForSeconds(fps);
+        } while (flow != Vector2.zero);
     }
 
     void CreateShape()
@@ -113,8 +113,8 @@ public class WaterMeshGenerator : MonoBehaviour
     {
         mesh.Clear();
 
-        mesh.vertices   = vertices;
-        mesh.triangles  = triangles;
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
         mesh.colors = colors;
 
         mesh.RecalculateNormals();
