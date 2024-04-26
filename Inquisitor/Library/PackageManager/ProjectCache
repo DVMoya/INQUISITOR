@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638493187417196329
+      ticks: 638493187420000000
     m_Hash: 3003645824
   m_LockFileStatus:
     m_FilePath: E:/universidad/INQUISITOR/Inquisitor/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638493187417231323
+      ticks: 638493187420000000
     m_Hash: 1785253093
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}

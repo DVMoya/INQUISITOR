@@ -13,10 +13,10 @@ public class WaterMeshGenerator : MonoBehaviour
 
     public GameObject target;
     public float planeHeight = 0;
-    public int xSize = 200;
-    public int zSize = 200;
+    public int xSize = 50;
+    public int zSize = 50;
     public float frameRate = .1f;
-    public float scale = 20f;
+    public float scale = 25f;
     public float xOffset = 0;
     public float zOffset = 0;
     public Vector2 flow = new Vector2(.05f, .05f);

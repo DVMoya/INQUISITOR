@@ -13,6 +13,7 @@ public class Level : MonoBehaviour
 
     private void Awake()
     {
+        transform.localScale = Vector3.zero;
         transform.DOScale(scale, duration);
     }
 
