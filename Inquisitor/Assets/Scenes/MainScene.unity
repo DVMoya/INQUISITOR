@@ -123,51 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &22051291
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 22051293}
-  - component: {fileID: 22051292}
-  m_Layer: 0
-  m_Name: FPS_counter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &22051292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22051291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84c1f3fde3ee15746832d7d6abb724fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateInterval: 0.5
---- !u!4 &22051293
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22051291}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.944225, y: 11.9562, z: 0.29504377}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &199277241
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,8 +770,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3420269563315790917, guid: ed3dfb3412e226245baabcf961163c39, type: 3}
       propertyPath: m_Name
-      value: Demon
+      value: MeleeDemon
       objectReference: {fileID: 0}
+    - target: {fileID: 6213522896204380834, guid: ed3dfb3412e226245baabcf961163c39, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: a58d63122b09e9144938cd6a1ece4824, type: 3}
     - target: {fileID: 8698840515048101573, guid: ed3dfb3412e226245baabcf961163c39, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -1002,7 +961,6 @@ SceneRoots:
   - {fileID: 1627237513}
   - {fileID: 1893626390}
   - {fileID: 6215903620187842918}
-  - {fileID: 22051293}
   - {fileID: 1861436707}
   - {fileID: 4877278693360719896}
   - {fileID: 2722158574897322740}
