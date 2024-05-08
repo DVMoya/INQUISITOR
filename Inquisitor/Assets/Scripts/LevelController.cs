@@ -13,6 +13,7 @@ public class LevelController : MonoBehaviour
 
     private System.Random random = new System.Random();
     
+    public GameObject gm;
     [HideInInspector] public GameObject[] posibleLevels;
     [SerializeField] private int xPosMod    = 0;
     [SerializeField] private int levelSize  = -20;
@@ -36,6 +37,7 @@ public class LevelController : MonoBehaviour
         position.x = xPosMod;
         currentLevel = Instantiate(posibleLevels[index], position, posibleLevels[index].transform.rotation);
         currentLevel.SetActive(true);
+        currentLevel.SendMessage("SetGm", gm);
 
         // Get rid of generated level in array, to avoid generating the same level repeatedly
         posibleLevels = posibleLevels.Where((e, i) => i != index).ToArray();

@@ -39,5 +39,7 @@ public class Dummy : Character
     public override void Kill()
     {
         m_Animator.SetBool("isDead", true);
+        Component lvl = GetComponentInParent<Level>();
+        lvl.SendMessage("EnemyDead");
     }
 }

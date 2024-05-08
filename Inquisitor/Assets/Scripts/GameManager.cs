@@ -27,20 +27,27 @@ public class GameManager : MonoBehaviour
         {
             float pingpong = Mathf.PingPong(Time.time, 1);
             timerText.color = Color.Lerp(Color.white, Color.red, pingpong);
-            timerText.transform.localScale = Vector3.Lerp(Vector3.one * 1.1f, Vector3.one, pingpong);
+            timerText.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.1f, pingpong);
         }
 
         minutes = (int)(timeElapsed / 60f);
         seconds = (int)(timeElapsed - minutes * 60f);
-        cents = (int)((timeElapsed - (int)(timeElapsed)) * 100f);
+        cents   = (int)((timeElapsed - (int)(timeElapsed)) * 100f);
 
         timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
 
         if (timeElapsed == 0) {
-            LevelController.SendMessage("CreateLevel");
-            timeElapsed = timerTime;
-            timerText.color = Color.white;
-            timerText.transform.localScale = Vector3.one;
+            /*
+             GAME OVER
+            */
         }
+    }
+
+    private void StageComplete()
+    {
+        LevelController.SendMessage("CreateLevel");
+        timeElapsed = timerTime;
+        timerText.color = Color.white;
+        timerText.transform.localScale = Vector3.one;
     }
 }
