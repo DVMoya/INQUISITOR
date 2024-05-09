@@ -8,7 +8,6 @@ public class NewBehaviourScript : Character
     private CharacterController m_Controller;
     private Animator m_Animator;
     public GameObject m_Player;
-    //public GameObject dust;
     public GameObject damageBox;
     public GameObject groundBox;
 
