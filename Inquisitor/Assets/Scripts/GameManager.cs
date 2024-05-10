@@ -5,8 +5,11 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [HideInInspector] public int score = 0;
+
     [SerializeField] private GameObject LevelController;
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text scoreText;
     [SerializeField] private float timerTime;
     private float timeElapsed;
     private int minutes, seconds, cents;
@@ -36,15 +39,17 @@ public class GameManager : MonoBehaviour
 
         timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
 
-        if (timeElapsed == 0) {
-            /*
-             GAME OVER
-            */
+        if (timeElapsed <= 0) {
+            LevelController.SendMessage("DestroyPreviousLevel", false);
+            Debug.Log("GAME OVER");
         }
     }
 
     private void StageComplete()
     {
+        score++;
+        scoreText.text = "SCORE: " + score.ToString();
+
         LevelController.SendMessage("CreateLevel");
         timeElapsed = timerTime;
         timerText.color = Color.white;

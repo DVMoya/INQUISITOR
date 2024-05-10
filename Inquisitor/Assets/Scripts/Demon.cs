@@ -37,5 +37,7 @@ public class Demon : Character
     public override void Kill()
     {
         Destroy(gameObject);
+        Component lvl = GetComponentInParent<Level>();
+        lvl.SendMessage("EnemyDead");
     }
 }

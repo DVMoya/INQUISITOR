@@ -13,14 +13,14 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
     public float _jumpF;
     public float _gravity;
 
-    public float HealthM    { get { return _healthM; } }
-    public float HealthC    { get { return _healthC; }      set { _healthC = value; } }
-    public float Damage     { get { return _damage; }       set { _damage = value; } }
-    public float DamageTick { get { return _damageTick; }   set { _damageTick = value; } }
-    public float SpeedM     { get { return _speedM; }       set { _speedM = value; } }
-    public float SpeedR     { get { return _speedR; }       set { _speedR = value; } }
-    public float JumpF      { get { return _jumpF; }        set { _jumpF = value; } }
-    public float Gravity    { get { return _gravity; }      set { _gravity = value; } }
+    public float HealthM { get { return _healthM; } }
+    public float HealthC { get { return _healthC; } set { _healthC = value; } }
+    public float Damage { get { return _damage; } set { _damage = value; } }
+    public float DamageTick { get { return _damageTick; } set { _damageTick = value; } }
+    public float SpeedM { get { return _speedM; } set { _speedM = value; } }
+    public float SpeedR { get { return _speedR; } set { _speedR = value; } }
+    public float JumpF { get { return _jumpF; } set { _jumpF = value; } }
+    public float Gravity { get { return _gravity; } set { _gravity = value; } }
 
     /*
         IDamageable INTERFACE
@@ -51,5 +51,9 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
 
     public abstract void DealDamage(Collider col);
 
-    public abstract void Kill();
+    public virtual void Kill()
+    {
+        Component lvl = GetComponentInParent<Level>();
+        lvl.SendMessage("EnemyDead");
+    }
 }

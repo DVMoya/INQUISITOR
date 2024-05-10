@@ -88,6 +88,7 @@ MonoBehaviour:
   - {fileID: 8744674033681946100}
   enemies:
   - {fileID: 6287388583169701557, guid: 9e850cd944fc1c847815834a9458544d, type: 3}
+  - {fileID: 3420269563315790917, guid: ed3dfb3412e226245baabcf961163c39, type: 3}
   nEnemies: 0
 --- !u!1 &3531631108017245544
 GameObject:

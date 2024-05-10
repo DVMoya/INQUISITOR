@@ -41,19 +41,30 @@ public class LevelController : MonoBehaviour
 
         // Get rid of generated level in array, to avoid generating the same level repeatedly
         posibleLevels = posibleLevels.Where((e, i) => i != index).ToArray();
-        Debug.Log(posibleLevels.Length);
 
         //increase positon displacement for the next level generated
         xPosMod += levelSize;
 
         // Get rid of the previous instance generated after a delay
-        StartCoroutine(DestroyPreviousLevel(previouslyGenerated));
+        DestroyPreviousLevel(true);
     }
 
-    IEnumerator DestroyPreviousLevel(GameObject destroyMe)
+    public void DestroyPreviousLevel(bool wait)
+    {
+        if (wait)
+        {
+            StartCoroutine(DestroyPreviousLevel(previouslyGenerated, wait));
+        }
+        else
+        {
+            StartCoroutine(DestroyPreviousLevel(currentLevel, wait));
+        }
+    }
+
+    IEnumerator DestroyPreviousLevel(GameObject destroyMe, bool wait)
     {
         if (destroyMe != null) {
-            yield return new WaitForSeconds(delay); // give the player some time to get out of danger
+            if(wait) { yield return new WaitForSeconds(delay); }    // give the player some time to get out of danger, only if he managed to kill all enemies
             destroyMe.SendMessage("Disappear");     // disappear animation
 
             yield return new WaitForSeconds(destroyMe.GetComponent<Level>().Duration);  // wait for the disapearing animation to finish

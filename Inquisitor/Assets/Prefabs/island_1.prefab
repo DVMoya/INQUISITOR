@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e477dbdc6d43e9e44a3e387a276262b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 0}
   scale: 1
   duration: 0.5
   spawns:
@@ -252,6 +253,7 @@ MonoBehaviour:
   - {fileID: 7233031190625006068}
   enemies:
   - {fileID: 6287388583169701557, guid: 9e850cd944fc1c847815834a9458544d, type: 3}
+  - {fileID: 3420269563315790917, guid: ed3dfb3412e226245baabcf961163c39, type: 3}
   nEnemies: 0
 --- !u!1 &8324741774394056674
 GameObject:
