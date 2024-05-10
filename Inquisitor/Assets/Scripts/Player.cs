@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NewBehaviourScript : Character
 {
@@ -11,6 +12,8 @@ public class NewBehaviourScript : Character
     public GameObject damageBox;
     public GameObject groundBox;
 
+    [SerializeField] private GameObject waterPlane;
+    [SerializeField] private Image fadeImage;
     private Vector3 moveDirection;
     private Vector3 rotation;
     private bool isAttacking    = false;
@@ -96,25 +99,26 @@ public class NewBehaviourScript : Character
 
         m_Animator.SetBool("isRunning", isRunning);
 
-        //if(isRunning && m_Controller.isGrounded) dust.SetActive(true);
-        //else dust.SetActive(false);
-
-
-
-
-
-        /*
-            TESTING SCIPTS
-        */
-        //if(Input.GetKeyDown(KeyCode.Alpha1)) TakeDamage(2f);
-        //if(Input.GetKeyDown(KeyCode.Alpha2)) Heal(2f);
-        //if(Input.GetKeyDown(KeyCode.Alpha3)) FullHeal();
+        if(transform.position.y <= waterPlane.GetComponent<WaterMeshGenerator>().planeHeight) {
+            FadeOut();
+        }
 
     }
 
     public override void DealDamage(Collider col)
     {
         col.SendMessage("TakeDamage", _damage);
+    }
+
+    IEnumerator FadeOut()
+    {
+        /*
+         * Añadir Fade out
+         */
+
+        yield return new WaitForSeconds(1);
+
+        Kill();
     }
 
     public override void Kill(){
