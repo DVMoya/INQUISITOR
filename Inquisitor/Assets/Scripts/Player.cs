@@ -8,14 +8,10 @@ public class NewBehaviourScript : Character
 {
     private CharacterController m_Controller;
     private Animator m_Animator;
-    public GameObject m_Player;
     public GameObject damageBox;
-    public GameObject groundBox;
 
     [SerializeField] private GameObject waterPlane;
-    [SerializeField] private Image fadeImage;
     private Vector3 moveDirection;
-    private Vector3 rotation;
     private bool isAttacking    = false;
     private bool isRunning      = false;
     private bool isAirborne     = false;
@@ -92,17 +88,10 @@ public class NewBehaviourScript : Character
         }
 
         //Prota corriendo
-        isRunning = Input.GetKey(KeyCode.W) ||
-                    Input.GetKey(KeyCode.A) ||
-                    Input.GetKey(KeyCode.S) ||
-                    Input.GetKey(KeyCode.D);
+        isRunning = Input.GetAxis("Horizontal") != 0
+                 || Input.GetAxis("Vertical")   != 0;
 
         m_Animator.SetBool("isRunning", isRunning);
-
-        if(transform.position.y <= waterPlane.GetComponent<WaterMeshGenerator>().planeHeight) {
-            FadeOut();
-        }
-
     }
 
     public override void DealDamage(Collider col)
@@ -110,18 +99,7 @@ public class NewBehaviourScript : Character
         col.SendMessage("TakeDamage", _damage);
     }
 
-    IEnumerator FadeOut()
-    {
-        /*
-         * Añadir Fade out
-         */
-
-        yield return new WaitForSeconds(1);
-
-        Kill();
-    }
-
     public override void Kill(){
-        Destroy(m_Player);
+        Destroy(this);
     } 
 }

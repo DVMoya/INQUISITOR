@@ -1406,6 +1406,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   LevelController: {fileID: 1627237512}
+  water: {fileID: 6215903620187842920}
+  player: {fileID: 778352394}
+  fadeImg: {fileID: 37842279}
   timerText: {fileID: 1713075320}
   scoreText: {fileID: 477437407}
   timerTime: 30
@@ -1543,6 +1546,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2204009546978796808, guid: 20460e986ba967946b82fca69d8f0eda, type: 3}
   m_PrefabInstance: {fileID: 6215903620187842918}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6215903620187842920 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8897214349747717736, guid: 20460e986ba967946b82fca69d8f0eda, type: 3}
+  m_PrefabInstance: {fileID: 6215903620187842918}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215903620187842919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3da676d59d15cb46b7368e3fed64dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
