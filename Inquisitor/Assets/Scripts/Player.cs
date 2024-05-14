@@ -100,6 +100,9 @@ public class NewBehaviourScript : Character
     }
 
     public override void Kill(){
-        Destroy(this);
+        
+        // wait for game over
+
+        // play dead animation
     } 
 }

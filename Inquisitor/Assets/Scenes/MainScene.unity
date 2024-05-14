@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  LevelController: {fileID: 1627237512}
+  levelController: {fileID: 1627237512}
   water: {fileID: 6215903620187842920}
   player: {fileID: 778352394}
   fadeImg: {fileID: 37842279}

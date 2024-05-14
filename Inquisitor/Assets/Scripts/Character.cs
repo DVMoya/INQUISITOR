@@ -12,6 +12,7 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
     public float _speedR;
     public float _jumpF;
     public float _gravity;
+    private bool _alreadyDead = false;
 
     public float HealthM { get { return _healthM; } }
     public float HealthC { get { return _healthC; } set { _healthC = value; } }
@@ -21,8 +22,7 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
     public float SpeedR { get { return _speedR; } set { _speedR = value; } }
     public float JumpF { get { return _jumpF; } set { _jumpF = value; } }
     public float Gravity { get { return _gravity; } set { _gravity = value; } }
-
-    private bool alreadyDead = false;
+    public bool AlreadyDead { get { return _alreadyDead; } set { _alreadyDead = value; } }
 
     /*
         IDamageable INTERFACE
@@ -47,12 +47,11 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
         if (_healthC <= 0f)
         {
             _healthC = 0f;
-            if (!alreadyDead)
+            if (!_alreadyDead)
             {
-                alreadyDead = true;
+                _alreadyDead = true;
                 Kill();
             }
-            Debug.Log("dead");
         }
     }
 
@@ -60,7 +59,22 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
 
     public virtual void Kill()
     {
-        Destroy(this.gameObject);
         GameObject.Find("LevelController").SendMessage("EnemyDead");
+        StartCoroutine(DelayedDeath());
+    }
+
+    public IEnumerator DelayedDeath()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        Renderer renderer = this.GetComponentInChildren<Renderer>();
+        
+        for (int i = 0; i < 15; i++) // make a blinking animation to show the corpse is dissappearing
+        {
+            yield return new WaitForSeconds(0.3f);
+            renderer.enabled = !renderer.enabled;
+        }
+
+        Destroy(this.gameObject);
     }
 }

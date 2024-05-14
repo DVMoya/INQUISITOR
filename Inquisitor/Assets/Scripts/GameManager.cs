@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector] public int score = 0;
 
-    [SerializeField] private GameObject LevelController;
+    [SerializeField] private GameObject levelController;
     [SerializeField] private WaterMeshGenerator water;
     [SerializeField] private GameObject player;
     [SerializeField] private Image fadeImg;
@@ -21,12 +21,12 @@ public class GameManager : MonoBehaviour
     private int minutes, seconds, cents;
     private int redZone = 10;
     private bool inFade = false;
-    private float fadeTime = 0.75f;
+    private float fadeTime = 1.5f;
 
     void Start()
     {
         StartCoroutine(FadeIn());
-        LevelController.SendMessage("CreateLevel");
+        levelController.SendMessage("CreateLevel");
         timeElapsed = timerTime;
     }
 
@@ -49,10 +49,11 @@ public class GameManager : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
 
         if (timeElapsed <= 0) {
-            LevelController.SendMessage("DestroyPreviousLevel", false);
+            levelController.SendMessage("DestroyPreviousLevel", false);
         }
 
-        if (water.planeHeight >= player.transform.position.y && !inFade)
+        if ((water.planeHeight >= player.transform.position.y ||
+            player.GetComponent<Character>()._healthC <= 0) && !inFade)
         {
             inFade = true;
             StartCoroutine(FadeOut());
@@ -105,7 +106,7 @@ public class GameManager : MonoBehaviour
         score++;
         scoreText.text = "SCORE: " + score.ToString();
 
-        LevelController.SendMessage("CreateLevel");
+        levelController.SendMessage("CreateLevel");
         timeElapsed = timerTime;
         timerText.color = Color.white;
         timerText.transform.localScale = Vector3.one;

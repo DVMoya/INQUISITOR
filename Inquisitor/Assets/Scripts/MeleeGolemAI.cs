@@ -15,42 +15,65 @@ public class MeleeGolemAI : Character
     //Attacking
     public float timeBetweenAttacks = .5f;
     bool alreadyAttacked;
-    public float attackRange = 5f;
-    public bool playerInRange;
+    public float attackRange = 1f;
+    public float chaseRange = 5f;
+    public bool playerInAttackRange = false;
+    public bool playerInChaseRange  = false;
 
-    [SerializeField] private float scale    = 1;
-    [SerializeField] private float duration = .5f;
+    [SerializeField] private float scale;
+    [SerializeField] private float duration;
+    [SerializeField] private GameObject damageBox;
+
+    private Animator animator;
 
     private void Awake()
     {
         transform.localScale = Vector3.zero;
         transform.DOScale(scale, duration);
 
-        player = GameObject.Find("Player").transform;
-        agent = GetComponent<NavMeshAgent>();
+        player   = GameObject.Find("Player").transform;
+        agent    = GetComponent<NavMeshAgent>();
+
+        animator = GetComponent<Animator>();
+        animator.SetFloat("atSpeed", _damageTick * 1.5f);
+
+        damageBox.GetComponent<DamageTrigger>().SetTick(_damageTick); // Tells the damage trigger the damage tick rate (this was the simplest way I could think of)
+        damageBox.SetActive(false);
 
         FullHeal();
     }
 
     private void Update()
     {
-        playerInRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        
-        if(FindAnyObjectByType<Unity.AI.Navigation.NavMeshSurface>() != null)
+        if (!AlreadyDead)
         {
-            if (!playerInRange) ChasePlayer();
-            else AttackPlayer();
+            playerInChaseRange  = Vector3.Distance(player.transform.position, transform.position) <= chaseRange;
+            playerInAttackRange = Vector3.Distance(player.transform.position, transform.position) <= attackRange;
+
+            if (FindAnyObjectByType<Unity.AI.Navigation.NavMeshSurface>() != null)
+            {
+                if (!playerInAttackRange && playerInChaseRange) ChasePlayer();
+                else if (playerInAttackRange) AttackPlayer();
+                else
+                {
+                    damageBox.SetActive(false);
+                    animator.SetBool("isRunning", false);
+                }
+            }
         }
     }
 
     private void ChasePlayer()
     {
+        damageBox.SetActive(false);
+        animator.SetBool("isRunning", true);
         agent.SetDestination(player.position);
     }
 
     private void AttackPlayer()
     {
-        Debug.Log("attack");
+        animator.SetBool("isRunning", false);
+        animator.SetBool("isAttacking", true);
 
         // make sure enemy doesnt move
         agent.SetDestination(transform.position);
@@ -59,7 +82,7 @@ public class MeleeGolemAI : Character
 
         if (!alreadyAttacked)
         {
-            // ATTACK CODE HERE
+            damageBox.SetActive(true);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -68,11 +91,18 @@ public class MeleeGolemAI : Character
 
     public override void DealDamage(Collider col)
     {
-        throw new System.NotImplementedException(); // Dummy's cant´deal damage
+        col.SendMessage("TakeDamage", _damage);
     }
 
     private void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    public override void Kill()
+    {
+        agent.enabled = false;
+
+        base.Kill();
     }
 }
