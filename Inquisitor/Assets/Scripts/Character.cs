@@ -22,6 +22,8 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
     public float JumpF { get { return _jumpF; } set { _jumpF = value; } }
     public float Gravity { get { return _gravity; } set { _gravity = value; } }
 
+    private bool alreadyDead = false;
+
     /*
         IDamageable INTERFACE
 
@@ -45,7 +47,12 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
         if (_healthC <= 0f)
         {
             _healthC = 0f;
-            Kill();
+            if (!alreadyDead)
+            {
+                alreadyDead = true;
+                Kill();
+            }
+            Debug.Log("dead");
         }
     }
 
@@ -53,6 +60,7 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
 
     public virtual void Kill()
     {
+        Destroy(this.gameObject);
         GameObject.Find("LevelController").SendMessage("EnemyDead");
     }
 }

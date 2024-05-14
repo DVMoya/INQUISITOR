@@ -20,8 +20,8 @@ public class LevelController : MonoBehaviour
 
     [HideInInspector] public GameObject[] posibleLevels;
     [HideInInspector] public int nEnemies = 0;          // number of enemies spawned/currently alive
-    [SerializeField] private GameObject[] enemies;  // posible types of enemies that can spawn
-    [SerializeField] private int xPosMod    = 0;
+    [SerializeField] private GameObject[] enemies;      // posible types of enemies that can spawn
+    [SerializeField] private int xPosMod    = 1;
     [SerializeField] private int levelSize  = -20;
     [SerializeField] private int delay      = 10;
     private int index;
@@ -68,9 +68,14 @@ public class LevelController : MonoBehaviour
         DestroyPreviousLevel(true);
     }
 
-    public IEnumerator SpawnEnemies(GameObject[] spawns)
+    public void SpawnEnemies(GameObject[] spawns)
     {
-        yield return new WaitForSeconds(.1f);
+        StartCoroutine(SpawnEnemiesCo(spawns));
+    }
+
+    IEnumerator SpawnEnemiesCo(GameObject[] spawns)
+    {
+        yield return new WaitForSeconds(.5f);
 
         foreach (GameObject i in spawns)
         {
@@ -85,6 +90,7 @@ public class LevelController : MonoBehaviour
 
         if (nEnemies == 0)
         {
+            Debug.Log(nEnemies);
             gm.SendMessage("StageComplete");
         }
     }

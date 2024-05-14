@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class MeleeGolemAI : Character
 {
@@ -17,8 +18,14 @@ public class MeleeGolemAI : Character
     public float attackRange = 5f;
     public bool playerInRange;
 
+    [SerializeField] private float scale    = 1;
+    [SerializeField] private float duration = .5f;
+
     private void Awake()
     {
+        transform.localScale = Vector3.zero;
+        transform.DOScale(scale, duration);
+
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
 
