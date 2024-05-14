@@ -94,13 +94,21 @@ public class NewBehaviourScript : Character
         m_Animator.SetBool("isRunning", isRunning);
     }
 
+    public override void TakeDamage(float damageTaken)
+    {
+        m_Animator.SetTrigger("GetHit");
+        base.TakeDamage(damageTaken);
+    }
+
     public override void DealDamage(Collider col)
     {
         col.SendMessage("TakeDamage", _damage);
     }
 
     public override void Kill(){
-        
+
+        m_Animator.SetBool("isDead", true);
+
         // wait for game over
 
         // play dead animation

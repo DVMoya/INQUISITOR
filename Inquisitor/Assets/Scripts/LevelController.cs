@@ -90,7 +90,6 @@ public class LevelController : MonoBehaviour
 
         if (nEnemies == 0)
         {
-            Debug.Log(nEnemies);
             gm.SendMessage("StageComplete");
         }
     }

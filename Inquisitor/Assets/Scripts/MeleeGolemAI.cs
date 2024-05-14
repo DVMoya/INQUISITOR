@@ -58,6 +58,7 @@ public class MeleeGolemAI : Character
                 {
                     damageBox.SetActive(false);
                     animator.SetBool("isRunning", false);
+                    animator.SetBool("isAttacking", false);
                 }
             }
         }
@@ -67,6 +68,7 @@ public class MeleeGolemAI : Character
     {
         damageBox.SetActive(false);
         animator.SetBool("isRunning", true);
+        animator.SetBool("isAttacking", false);
         agent.SetDestination(player.position);
     }
 
@@ -99,9 +101,17 @@ public class MeleeGolemAI : Character
         alreadyAttacked = false;
     }
 
+    public override void TakeDamage(float damageTaken)
+    {
+        animator.SetTrigger("GetHit");
+        base.TakeDamage(damageTaken);
+    }
+
     public override void Kill()
     {
         agent.enabled = false;
+        damageBox.SetActive(false);
+        animator.SetBool("isDead", true);
 
         base.Kill();
     }
