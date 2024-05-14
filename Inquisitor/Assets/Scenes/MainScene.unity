@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1066,6 +1066,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1627237513}
   - component: {fileID: 1627237514}
+  - component: {fileID: 1627237515}
   m_Layer: 0
   m_Name: LevelController
   m_TagString: Untagged
@@ -1104,11 +1105,45 @@ MonoBehaviour:
   - {fileID: 7560507520328861126, guid: 5c5a55f8e2f8cb9458184de41d7146ef, type: 3}
   - {fileID: 3116388172860092954, guid: b10a100d45597f644b71f279fec1a94b, type: 3}
   - {fileID: 2384327659042514815, guid: 6f88bae322917d049be77cb414055511, type: 3}
-  gm: {fileID: 1893626389}
   posibleLevels: []
+  nEnemies: 0
+  enemies:
+  - {fileID: 4659082739283874881, guid: 0907f23170846b7428deee2fe664c43b, type: 3}
+  - {fileID: 6287388583169701557, guid: 9e850cd944fc1c847815834a9458544d, type: 3}
   xPosMod: 0
   levelSize: -20
   delay: 10
+--- !u!114 &1627237515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627237512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 1
+  m_Size: {x: 20, y: 20, z: 20}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &1713075318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,58 +1286,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 763710628621552052, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 763710628621552052, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 763710628621552052, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1737141588686342706, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: _jumpF
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1737141588686342706, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: _damage
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1737141588686342706, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: _speedM
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1737141588686342706, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: _speedR
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1737141588686342706, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: fadeImage
-      value: 
-      objectReference: {fileID: 37842279}
-    - target: {fileID: 1737141588686342706, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: groundBox
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1737141588686342706, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: waterPlane
       value: 
       objectReference: {fileID: 6215903620187842919}
-    - target: {fileID: 2066896392038131574, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066896392038131574, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066896392038131574, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2066896392038131574, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1346,14 +1333,6 @@ PrefabInstance:
     - target: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2925525381046845787, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6332956406583387875, guid: 45288819fde2143449a96207b14db0bb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

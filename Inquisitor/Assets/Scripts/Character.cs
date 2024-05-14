@@ -53,7 +53,6 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
 
     public virtual void Kill()
     {
-        Component lvl = GetComponentInParent<Level>();
-        lvl.SendMessage("EnemyDead");
+        GameObject.Find("LevelController").SendMessage("EnemyDead");
     }
 }

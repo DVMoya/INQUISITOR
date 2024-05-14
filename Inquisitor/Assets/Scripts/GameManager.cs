@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -49,7 +50,6 @@ public class GameManager : MonoBehaviour
 
         if (timeElapsed <= 0) {
             LevelController.SendMessage("DestroyPreviousLevel", false);
-            Debug.Log("GAME OVER");
         }
 
         if (water.planeHeight >= player.transform.position.y && !inFade)

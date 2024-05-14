@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Unity.AI.Navigation;
 
 public class LevelController : MonoBehaviour
 {
@@ -13,8 +14,13 @@ public class LevelController : MonoBehaviour
 
     private System.Random random = new System.Random();
     
-    public GameObject gm;
+    private GameObject gm;
+
+    private NavMeshSurface surface;
+
     [HideInInspector] public GameObject[] posibleLevels;
+    [HideInInspector] public int nEnemies = 0;          // number of enemies spawned/currently alive
+    [SerializeField] private GameObject[] enemies;  // posible types of enemies that can spawn
     [SerializeField] private int xPosMod    = 0;
     [SerializeField] private int levelSize  = -20;
     [SerializeField] private int delay      = 10;
@@ -22,6 +28,14 @@ public class LevelController : MonoBehaviour
 
     private GameObject previouslyGenerated;
     private GameObject currentLevel;
+
+    private System.Random rand = new System.Random();
+
+    private void Awake()
+    {
+        surface = GetComponent<NavMeshSurface>();
+        gm = GameObject.Find("GameManager");
+    }
 
     public void CreateLevel()
     {
@@ -37,7 +51,12 @@ public class LevelController : MonoBehaviour
         position.x = xPosMod;
         currentLevel = Instantiate(posibleLevels[index], position, posibleLevels[index].transform.rotation);
         currentLevel.SetActive(true);
-        currentLevel.SendMessage("SetGm", gm);
+
+        // Put the controller in the new island before generating the nav mesh
+        transform.position = currentLevel.transform.position;
+
+        // Clear and recreate nav mesh
+        surface.BuildNavMesh();
 
         // Get rid of generated level in array, to avoid generating the same level repeatedly
         posibleLevels = posibleLevels.Where((e, i) => i != index).ToArray();
@@ -47,6 +66,27 @@ public class LevelController : MonoBehaviour
 
         // Get rid of the previous instance generated after a delay
         DestroyPreviousLevel(true);
+    }
+
+    public IEnumerator SpawnEnemies(GameObject[] spawns)
+    {
+        yield return new WaitForSeconds(.1f);
+
+        foreach (GameObject i in spawns)
+        {
+            Instantiate(enemies[rand.Next(enemies.Length)], i.transform);
+            nEnemies++;
+        }
+    }
+
+    private void EnemyDead()
+    {
+        nEnemies--;
+
+        if (nEnemies == 0)
+        {
+            gm.SendMessage("StageComplete");
+        }
     }
 
     public void DestroyPreviousLevel(bool wait)
