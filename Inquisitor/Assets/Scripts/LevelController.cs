@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Unity.AI.Navigation;
+using random = UnityEngine.Random;
 
 public class LevelController : MonoBehaviour
 {
@@ -12,8 +13,6 @@ public class LevelController : MonoBehaviour
 
     public GameObject[] levels;
 
-    private System.Random random = new System.Random();
-    
     private GameObject gm;
 
     private NavMeshSurface surface;
@@ -29,8 +28,6 @@ public class LevelController : MonoBehaviour
     private GameObject previouslyGenerated;
     private GameObject currentLevel;
 
-    private System.Random rand = new System.Random();
-
     private void Awake()
     {
         surface = GetComponent<NavMeshSurface>();
@@ -44,7 +41,7 @@ public class LevelController : MonoBehaviour
         if (posibleLevels.Length == 0) { posibleLevels = levels; }
 
         // Select a random level
-        index = random.Next(posibleLevels.Length);
+        index = random.Range(0, posibleLevels.Length);
 
         // GeneratedCodeAttribute random level
         Vector3 position = Vector3.zero;
@@ -79,7 +76,8 @@ public class LevelController : MonoBehaviour
 
         foreach (GameObject i in spawns)
         {
-            Instantiate(enemies[rand.Next(enemies.Length)], i.transform);
+            
+            Instantiate(enemies[random.Range(0, enemies.Length)], i.transform.position, Quaternion.Euler(0, random.Range(0f, 360f), 0));
             nEnemies++;
         }
     }

@@ -66,4 +66,9 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ResetSave()
+    {
+        PlayerPrefs.SetInt("ScoreBest", 0);
+    }
 }

@@ -4,16 +4,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameOver : MonoBehaviour
 {
     [SerializeField] private float fadeTime = 0.75f;
     [SerializeField] private Image fadeImg;
+    [SerializeField] private TMP_Text scoreB;
+    [SerializeField] private TMP_Text scoreF;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(FadeIn());
+
+        SetScoreBoard();
+    }
+
+    private void SetScoreBoard()
+    {
+        scoreB.text = "BEST SCORE: "  + PlayerPrefs.GetInt("ScoreBest", 0);
+        scoreF.text = "FINAL SCORE: " + PlayerPrefs.GetInt("ScoreCurr", 0);
     }
 
     IEnumerator FadeIn()

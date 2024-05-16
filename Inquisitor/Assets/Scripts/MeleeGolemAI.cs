@@ -6,9 +6,8 @@ using DG.Tweening;
 
 public class MeleeGolemAI : Character
 {
-    public NavMeshAgent agent;
-
-    public Transform player;
+    [HideInInspector] public NavMeshAgent agent;
+    [HideInInspector] public Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -17,8 +16,8 @@ public class MeleeGolemAI : Character
     bool alreadyAttacked;
     public float attackRange = 1f;
     public float chaseRange = 5f;
-    public bool playerInAttackRange = false;
-    public bool playerInChaseRange  = false;
+    [HideInInspector] public bool playerInAttackRange = false;
+    [HideInInspector] public bool playerInChaseRange  = false;
 
     [SerializeField] private float scale;
     [SerializeField] private float duration;

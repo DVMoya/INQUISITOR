@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FadeIn());
         levelController.SendMessage("CreateLevel");
         timeElapsed = timerTime;
+        PlayerPrefs.SetInt("ScoreCurr", score);
     }
 
     private void Update()
@@ -105,6 +106,13 @@ public class GameManager : MonoBehaviour
     {
         score++;
         scoreText.text = "SCORE: " + score.ToString();
+
+        // Store score in currentg computer
+        PlayerPrefs.SetInt("ScoreCurr", score);
+        if(score > PlayerPrefs.GetInt("ScoreBest", 0))
+        {
+            PlayerPrefs.SetInt("ScoreBest", score);
+        }
 
         levelController.SendMessage("CreateLevel");
         timeElapsed = timerTime;
