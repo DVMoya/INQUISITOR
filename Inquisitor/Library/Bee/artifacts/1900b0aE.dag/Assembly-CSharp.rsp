@@ -390,7 +390,6 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/Character.cs"
 "Assets/Scripts/DamageTrigger.cs"
-"Assets/Scripts/Demon.cs"
 "Assets/Scripts/Dummy.cs"
 "Assets/Scripts/FPScounter.cs"
 "Assets/Scripts/GameManager.cs"

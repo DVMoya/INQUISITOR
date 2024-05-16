@@ -110,6 +110,8 @@ public class MeleeGolemAI : Character
     {
         agent.enabled = false;
         damageBox.SetActive(false);
+        animator.SetBool("isRunning", false);
+        animator.SetBool("isAttacking", false);
         animator.SetBool("isDead", true);
 
         base.Kill();

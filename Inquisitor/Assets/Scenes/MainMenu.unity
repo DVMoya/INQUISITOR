@@ -335,6 +335,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'wasd --> move
 
+    k --> attack
+
     space --> jump'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb36e87685be2ab4ab2517dd567757a7, type: 2}
