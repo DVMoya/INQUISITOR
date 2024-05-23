@@ -14,6 +14,9 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
     public float _gravity;
     private bool _alreadyDead = false;
 
+    [SerializeField] private AudioClip takeHitSound;
+    [SerializeField] private AudioClip dieSound;
+
     public float HealthM { get { return _healthM; } }
     public float HealthC { get { return _healthC; } set { _healthC = value; } }
     public float Damage { get { return _damage; } set { _damage = value; } }
@@ -43,6 +46,8 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
 
     public virtual void TakeDamage(float damageTaken)
     {
+        AudioController.Instance.PlaySound(takeHitSound);
+
         _healthC -= damageTaken;
         if (_healthC <= 0f)
         {
@@ -65,6 +70,8 @@ public abstract class Character : MonoBehaviour, IDamageable<float>
 
     public IEnumerator DelayedDeath()
     {
+        AudioController.Instance.PlaySound(dieSound);
+
         yield return new WaitForSeconds(0.5f);
 
         Renderer renderer = this.GetComponentInChildren<Renderer>();

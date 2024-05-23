@@ -44,7 +44,7 @@ public class MeleeGolemAI : Character
 
     private void Update()
     {
-        if (!AlreadyDead)
+        if (!AlreadyDead && player.GetComponent<Character>()._healthC > 0)
         {
             playerInChaseRange  = Vector3.Distance(player.transform.position, transform.position) <= chaseRange;
             playerInAttackRange = Vector3.Distance(player.transform.position, transform.position) <= attackRange;
@@ -60,6 +60,12 @@ public class MeleeGolemAI : Character
                     animator.SetBool("isAttacking", false);
                 }
             }
+        }
+        else
+        {
+            damageBox.SetActive(false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isAttacking", false);
         }
     }
 

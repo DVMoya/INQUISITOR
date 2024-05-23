@@ -185,4 +185,6 @@ MonoBehaviour:
   _speedR: 0
   _jumpF: 0
   _gravity: 0
+  takeHitSound: {fileID: 8300000, guid: 6e51af77799b5b54da6c105c3cb82438, type: 3}
+  dieSound: {fileID: 8300000, guid: 6e51af77799b5b54da6c105c3cb82438, type: 3}
   _animSpeed: 0.7

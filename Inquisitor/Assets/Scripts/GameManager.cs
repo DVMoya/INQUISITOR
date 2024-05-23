@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private float timerTime;
+    [SerializeField] private AudioClip gameOverSFX;
     private float timeElapsed;
     private int minutes, seconds, cents;
     private int redZone = 10;
@@ -83,6 +84,10 @@ public class GameManager : MonoBehaviour
     IEnumerator FadeOut()
     {
         fadeImg.enabled = true;
+
+        GetComponent<AudioSource>().enabled = false;
+
+        AudioController.Instance.PlaySound(gameOverSFX);
 
         Color c;
         float alpha;

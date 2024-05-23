@@ -630,6 +630,8 @@ MonoBehaviour:
   _speedR: 0
   _jumpF: 0
   _gravity: 0
+  takeHitSound: {fileID: 8300000, guid: 2318cf4af7e8f5347a5b5266558b7532, type: 3}
+  dieSound: {fileID: 8300000, guid: 2318cf4af7e8f5347a5b5266558b7532, type: 3}
   agent: {fileID: 0}
   player: {fileID: 0}
   whatIsGround:

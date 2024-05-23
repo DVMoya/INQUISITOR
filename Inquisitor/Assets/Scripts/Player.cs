@@ -10,6 +10,8 @@ public class NewBehaviourScript : Character
     private Animator m_Animator;
     public GameObject damageBox;
 
+    [SerializeField] private AudioClip jumpSFX;
+
     [SerializeField] private GameObject waterPlane;
     private Vector3 moveDirection;
     private bool isAttacking    = false;
@@ -44,6 +46,8 @@ public class NewBehaviourScript : Character
             moveDirection = moveDirection + transform.forward * Input.GetAxis("Vertical") * _speedM;
 
             if (Input.GetKey(KeyCode.Space)){
+                AudioController.Instance.PlaySound(jumpSFX);
+
                 moveDirection.y = _jumpF;
 
                 m_Animator.SetBool("isAirborne", true);
@@ -106,11 +110,6 @@ public class NewBehaviourScript : Character
     }
 
     public override void Kill(){
-
         m_Animator.SetBool("isDead", true);
-
-        // wait for game over
-
-        // play dead animation
     } 
 }
