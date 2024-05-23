@@ -15,6 +15,7 @@ Library: E:\universidad\INQUISITOR\Inquisitor\Temp\BurstOutput\Data\Plugins\x86_
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
+--assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
@@ -78,6 +79,7 @@ Library: E:\universidad\INQUISITOR\Inquisitor\Temp\BurstOutput\Data\Plugins\x86_
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
+--assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
@@ -139,6 +141,7 @@ Library: E:\universidad\INQUISITOR\Inquisitor\Temp\BurstOutput\Data\Plugins\x86_
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
+--assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
@@ -206,6 +209,7 @@ Library: E:\universidad\INQUISITOR\Inquisitor\Temp\BurstOutput\Data\Plugins\x86_
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
+--assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;

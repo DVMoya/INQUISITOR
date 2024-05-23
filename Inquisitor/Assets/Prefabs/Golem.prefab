@@ -577,7 +577,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 1.25
   m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -645,7 +645,7 @@ MonoBehaviour:
   chaseRange: 6
   playerInAttackRange: 0
   playerInChaseRange: 0
-  scale: 1.3
+  scale: 1
   duration: 0.5
   damageBox: {fileID: 6983014330896090905}
 --- !u!1 &4659082739283874883
